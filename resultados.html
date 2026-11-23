@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultado de Compromiso - Eco-Venados</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <h1>¡Gracias por tu compromiso, Eco-Venado!</h1>
+
+    <div id="contenido"></div>
+
+    <p>
+        <a href="index.html">Volver a la Portada</a>
+    </p>
+
+    <script>
+        const datos = new URLSearchParams(window.location.search);
+        const nombre = datos.get('nombre');
+        const edad = datos.get('edad');
+        const grupo = datos.get('grupo');
+        const residuo = datos.get('residuo_frecuente');
+        const separas = datos.get('separas');
+        const accion = datos.get('accion_ambiente');
+        const compromiso = datos.get('compromiso');
+        const comentario = datos.get('comentario');
+
+        let html = "";
+
+        if (nombre) {
+            html += "<h2>Resumen de tu registro</h2>";
+            html += "<p>Hola <strong>" + nombre + "</strong> (" + edad + " años, grupo <strong>" + grupo + "</strong>), hemos registrado tu participación en el proyecto <strong>PAEC: Eco-Venados Transformando el Entorno</strong>.</p>";
+            html += "<p><strong>Residuo que más generas:</strong> " + residuo + "<br>";
+            html += "<strong>Acción que ya realizas:</strong> " + accion + "<br>";
+            html += "<strong>Tu comentario o propuesta:</strong> <em>" + comentario + "</em></p>";
+
+            html += "<h2>Diagnóstico de tus hábitos</h2>";
+            let nivel = "";
+            if (separas === "Si") {
+                html += "<p><strong>¡Excelente trabajo!</strong> Ya separas tus residuos en casa. Eres un ejemplo para tu grupo y tu comunidad en Ciudad Juárez.</p>";
+                nivel = "Guardián Eco-Venado (Nivel Oro)";
+            } else if (separas === "Algunas veces") {
+                html += "<p><strong>¡Vas por muy buen camino!</strong> Ya tienes la iniciativa de separar tus desechos; con un poco más de constancia lograrás hacerlo un hábito diario.</p>";
+                nivel = "Explorador Eco-Venado (Nivel Plata)";
+            } else {
+                html += "<p><strong>¡Hoy es un gran día para empezar!</strong> Aunque todavía no separas tus residuos, dar este primer paso ayudará muchísimo a reducir la basura en nuestra escuela.</p>";
+                nivel = "Iniciado Eco-Venado (Nivel Bronce)";
+            }
+
+            html += "<h2>Reto Especial: Calculadora de Impacto Ambiental</h2>";
+            html += "<p><strong>Tu rango asignado es:</strong> " + nivel + "</p>";
+            html += "<p>Elegiste el compromiso de: <strong>" + compromiso + "</strong>. Si cumples este reto durante todo un año (52 semanas), este será tu impacto real:</p>";
+
+            if (compromiso === "Reducir el uso de plastico") {
+                html += "<p>Si evitas tan solo 3 envases desechables a la semana, dejarás de generar <strong>" + (3 * 52) + " botellas de plástico al año</strong>, evitando que terminen en los arroyos o diques de nuestra ciudad.</p>";
+            } else if (compromiso === "Separar residuos") {
+                html += "<p>Separando apenas 2 kilogramos de basura reciclable por semana, rescatarás <strong>" + (2 * 52) + " kilogramos de materiales al año</strong> para que vuelvan a aprovecharse en lugar de ir al relleno sanitario.</p>";
+            } else if (compromiso === "Reutilizar materiales") {
+                html += "<p>Al darle una segunda vida a 4 objetos cada mes (frascos, hojas, ropa o envases), evitarás la fabricación de <strong>" + (4 * 12) + " productos nuevos al año</strong>, ahorrando agua y energía.</p>";
+            } else if (compromiso === "Participar en campanas") {
+                html += "<p>Participando en 1 campaña por trimestre (4 al año), ayudarás a limpiar y recuperar aproximadamente <strong>" + (50 * 4) + " metros cuadrados</strong> de áreas verdes en nuestra preparatoria y comunidad.</p>";
+            } else if (compromiso === "Reciclar aparatos electronicos") {
+                html += "<p>Al llevar al menos 2 aparatos o pilas viejas a un centro de acopio en el año, evitarás que sus metales pesados contaminen hasta <strong>" + (3000 * 2) + " litros de agua</strong> del subsuelo.</p>";
+            } else {
+                html += "<p>Recuerda seleccionar una opción de compromiso en el formulario para calcular tu impacto anual.</p>";
+            }
+        } else {
+            html += "<p>No se recibieron datos. Por favor llena primero el formulario en la portada.</p>";
+        }
+
+        document.getElementById('contenido').innerHTML = html;
+    </script>
+
+</body>
+</html>
