@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mini-Juego: Reto Eco-Venados</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+    <a name="arriba"></a>
+    <h1>Mini-Juego: ¿Sabes separar la basura?</h1>
+
+    <p>
+        <a href="index.html">Volver a la Portada</a>
+    </p>
+
+    <h2>Instrucciones del reto</h2>
+    <p>
+        Pon a prueba tus conocimientos ambientales. Selecciona el contenedor o manejo correcto para cada uno de los siguientes <strong>5 residuos</strong> y descubre qué nivel de reciclador eres:
+    </p>
+
+    <form id="quizForm">
+        <strong>1. Una botella de agua vacía y aplastada (PET):</strong><br>
+        <input type="radio" name="p1" value="correcto"> Contenedor de Plástico (Inorgánico reciclable)<br>
+        <input type="radio" name="p1" value="incorrecto"> Contenedor de Residuos Orgánicos<br>
+        <input type="radio" name="p1" value="incorrecto"> Basura sanitaria / no reciclable<br><br>
+
+        <strong>2. Cáscaras de plátano, manzana y restos de fruta del receso:</strong><br>
+        <input type="radio" name="p2" value="incorrecto"> Contenedor de Papel y Cartón<br>
+        <input type="radio" name="p2" value="correcto"> Contenedor de Residuos Orgánicos (sirven para composta)<br>
+        <input type="radio" name="p2" value="incorrecto"> Contenedor de Vidrio<br><br>
+
+        <strong>3. Una caja de cartón limpia y seca:</strong><br>
+        <input type="radio" name="p3" value="correcto"> Contenedor de Papel y Cartón<br>
+        <input type="radio" name="p3" value="incorrecto"> Contenedor de Metal<br>
+        <input type="radio" name="p3" value="incorrecto"> Contenedor de Orgánicos<br><br>
+
+        <strong>4. Una caja de pizza llena de grasa y restos de queso:</strong><br>
+        <input type="radio" name="p4" value="incorrecto"> Contenedor de Papel y Cartón limpio<br>
+        <input type="radio" name="p4" value="correcto"> Basura general (la grasa contamina el cartón y ya no se recicla)<br>
+        <input type="radio" name="p4" value="incorrecto"> Contenedor de Vidrio y Metal<br><br>
+
+        <strong>5. Pilas alcalinas usadas o un celular viejo que ya no sirve:</strong><br>
+        <input type="radio" name="p5" value="incorrecto"> Tirarlos junto con las botellas de plástico<br>
+        <input type="radio" name="p5" value="incorrecto"> Enterrarlos en una maceta o área verde<br>
+        <input type="radio" name="p5" value="correcto"> Llevarlos a un centro de acopio de residuos electrónicos / peligrosos<br><br>
+
+        <input type="button" value="Calificar mis respuestas" onclick="calificarJuego()">
+        <input type="reset" value="Reiniciar juego" onclick="limpiarResultado()">
+    </form>
+
+    <div id="resultadoJuego"></div>
+
+    <p>
+        <a href="#arriba">Volver arriba</a>
+        <a href="index.html">Volver a la Portada</a>
+    </p>
+
+    <script>
+        function calificarJuego() {
+            let puntos = 0;
+            for (let i = 1; i <= 5; i++) {
+                const opciones = document.getElementsByName('p' + i);
+                for (let j = 0; j < opciones.length; j++) {
+                    if (opciones[j].checked && opciones[j].value === "correcto") {
+                        puntos++;
+                    }
+                }
+            }
+
+            let mensaje = "<h2>Resultado de tu partida: " + puntos + " de 5 aciertos</h2>";
+
+            if (puntos === 5) {
+                mensaje += "<p><strong>¡Puntuación perfecta! Medalla de Oro Eco-Venado:</strong> Dominas al 100% la separación de residuos y estás listo para liderar el cambio en la preparatoria.</p>";
+            } else if (puntos >= 3) {
+                mensaje += "<p><strong>¡Buen trabajo! Medalla de Plata Eco-Venado:</strong> Tienes muy buenas bases, solo revisa los detalles para no contaminar materiales reciclables.</p>";
+            } else {
+                mensaje += "<p><strong>¡Sigue practicando! Medalla de Bronce Eco-Venado:</strong> Te recomendamos repasar las secciones de <em>Tipos de residuos</em> y <em>Las 3R</em> en la portada e intentarlo de nuevo.</p>";
+            }
+
+            document.getElementById('resultadoJuego').innerHTML = mensaje;
+        }
+
+        function limpiarResultado() {
+            document.getElementById('resultadoJuego').innerHTML = "";
+        }
+    </script>
+
+</body>
+</html>
